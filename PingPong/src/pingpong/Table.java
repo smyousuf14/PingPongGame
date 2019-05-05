@@ -22,7 +22,7 @@ public class Table extends JPanel
     */
     public Table()
     {
-        
+       
     }
     
     /*
@@ -34,10 +34,10 @@ public class Table extends JPanel
         super.paintComponent(g);
         
         // Set a background colour
-        this.setBackground(Color.WHITE);
+        this.setBackground(Color.BLACK);
         
         g.setColor(Color.BLUE);
-        g.fillRect(240, 240, 200, 200);
+        g.fillRect(240, 240, 100, 50);
     }
     /*
     * A test method
@@ -51,6 +51,7 @@ public class Table extends JPanel
         f1.setSize(900,900);
         f1.setVisible(true);
         f1.add(PongTable);
+        f1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
     }
     
