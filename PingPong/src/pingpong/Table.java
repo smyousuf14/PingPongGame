@@ -12,33 +12,78 @@ import javax.swing.*;
  *
  * @author Syed Yousuf
  */
-public class Table extends JPanel
+public class Table extends JPanel implements KeyListener
 {
     // Instance Variables
-    
+    private Paddle userPaddle;
+    private JFrame f1; // The Jframe
     
     /*
     * Default Constructor
     */
     public Table()
     {
+        // Create a new window
+        f1 = new JFrame("Ping Pong");
+        f1.setSize(900,900);
+        f1.setVisible(true);
+        f1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        // Now create the user's paddle
+        userPaddle = new Paddle(20,600,30,90);
+        f1.add(userPaddle);
+        
+        f1.addKeyListener(this);
+        f1.setFocusable(true);
+        f1.setFocusTraversalKeysEnabled(false);
+        
+        
        
     }
     
     /*
-    * The paint method 
+    * The events to run when the key is pressed
     */
-    @Override 
-    public void paintComponent(Graphics g)
+    @Override
+    public void keyPressed(KeyEvent e)
     {
-        super.paintComponent(g);
+        // The key code
+        int keyCode = e.getKeyCode();
         
-        // Set a background colour
-        this.setBackground(Color.BLACK);
+        // When the user presses the right key the users paddle should move to the right.
+        if(keyCode == KeyEvent.VK_KP_RIGHT)
+        {
+            System.out.println("right");
+            // Move the user paddle to the right.
+            userPaddle.moveX(10);
+            
+            // Now repaint
+            f1.repaint();
+            
+            e.consume();
+        }
         
-        g.setColor(Color.BLUE);
-        g.fillRect(240, 240, 100, 50);
     }
+    
+    /*
+    * The events to run when a key is released
+    */
+    @Override
+    public void keyReleased(KeyEvent e)
+    {
+        e.consume();
+    }
+    
+    /*
+    * The events to run when a key is typed
+    */
+    @Override
+    public void keyTyped(KeyEvent e)
+    {
+        e.consume();
+    }
+    
+    
     /*
     * A test method
     */
@@ -46,12 +91,6 @@ public class Table extends JPanel
     {
         Table PongTable = new Table();
         
-        // Create the frame 
-        JFrame f1 = new JFrame("Ping Pong");
-        f1.setSize(900,900);
-        f1.setVisible(true);
-        f1.add(PongTable);
-        f1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
     }
     
