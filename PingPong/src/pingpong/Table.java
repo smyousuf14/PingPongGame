@@ -17,7 +17,7 @@ public class Table extends JPanel implements KeyListener
     // Instance Variables
     private Paddle userPaddle;
     private JFrame f1; // The Jframe
-    
+        
     /*
     * Default Constructor
     */
