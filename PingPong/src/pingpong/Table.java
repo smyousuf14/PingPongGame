@@ -33,6 +33,7 @@ public class Table extends JPanel implements KeyListener
         userPaddle = new Paddle(20,600,30,90);
         f1.add(userPaddle);
         
+        // Add the key listeners to the frame.
         f1.addKeyListener(this);
         f1.setFocusable(true);
         f1.setFocusTraversalKeysEnabled(false);
@@ -48,14 +49,25 @@ public class Table extends JPanel implements KeyListener
     public void keyPressed(KeyEvent e)
     {
         // The key code
-        int keyCode = e.getKeyCode();
+        
         
         // When the user presses the right key the users paddle should move to the right.
-        if(keyCode == KeyEvent.VK_KP_RIGHT)
+        if(e.getKeyCode() == 39)
         {
-            System.out.println("right");
+            
             // Move the user paddle to the right.
             userPaddle.moveX(10);
+            
+            // Now repaint
+            f1.repaint();
+            
+            e.consume();
+        }
+        else
+        if(e.getKeyCode() == 37)
+        {
+            // Move the user paddle to the left
+            userPaddle.moveX(-10);
             
             // Now repaint
             f1.repaint();
@@ -71,6 +83,7 @@ public class Table extends JPanel implements KeyListener
     @Override
     public void keyReleased(KeyEvent e)
     {
+        // Nothing
         e.consume();
     }
     
@@ -80,6 +93,7 @@ public class Table extends JPanel implements KeyListener
     @Override
     public void keyTyped(KeyEvent e)
     {
+        // Nothing
         e.consume();
     }
     
