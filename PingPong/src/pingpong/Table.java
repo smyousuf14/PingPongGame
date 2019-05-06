@@ -17,6 +17,9 @@ public class Table extends JPanel implements KeyListener
     // Instance Variables
     private Paddle userPaddle;
     private JFrame f1; // The Jframe
+    private Paddle opponentPaddle;
+    private Thread ballThread;
+    private Ball ball;
         
     /*
     * Default Constructor
@@ -29,14 +32,23 @@ public class Table extends JPanel implements KeyListener
         f1.setVisible(true);
         f1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
+        
         // Now create the user's paddle
         userPaddle = new Paddle(20,600,30,90);
         f1.add(userPaddle);
+        
+        ball = new Ball(20,20,30);
+        ballThread = new Thread(ball);
+        ballThread.start();
+        
         
         // Add the key listeners to the frame.
         f1.addKeyListener(this);
         f1.setFocusable(true);
         f1.setFocusTraversalKeysEnabled(false);
+        
+        f1.validate();
+        f1.repaint();
         
         
        
@@ -96,6 +108,9 @@ public class Table extends JPanel implements KeyListener
         // Nothing
         e.consume();
     }
+    
+    
+   
     
     
     /*

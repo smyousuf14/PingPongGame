@@ -11,7 +11,7 @@ import javax.swing.*;
  *
  * @author Syed Yousuf
  */
-public class Paddle extends JPanel
+public class Paddle extends JPanel 
 {
     // Instance variables
     private double length;
@@ -132,6 +132,8 @@ public class Paddle extends JPanel
         g.setColor(Color.BLUE);
         g.fillRect((int)xCoordinate, (int)yCoordinate, (int)width, (int)length);
     }
+    
+   
     
     /*
     * Providing a string representation of this class.

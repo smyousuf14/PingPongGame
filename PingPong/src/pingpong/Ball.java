@@ -12,7 +12,7 @@ import javax.swing.*;
  *
  * @author Syed Yousuf
  */
-public class Ball extends JPanel
+public class Ball extends JPanel implements Runnable
 {
     // Instance Variables
     private double radius;
@@ -110,10 +110,24 @@ public class Ball extends JPanel
     {
         super.paintComponent(g);
         
+        
+        // Set a background colour
+        this.setBackground(Color.BLACK);
         g.setColor(Color.RED);
         g.fillOval((int)xCoordinate, (int)yCoordinate, (int)(2 * radius), (int)(2 * radius));
         
     }
+    
+     /*
+    * The method that will run a seperate thread.
+    */
+    @Override
+    public void run()
+    {
+        /*Move the ball accordingly and make sure to check if it collides with any of the two paddles*/
+        
+    }
+    
     
     /*
     * Providing a string representation of this class.
