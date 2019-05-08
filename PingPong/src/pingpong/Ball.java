@@ -105,7 +105,7 @@ public class Ball extends JPanel implements Runnable
     /*
     * The override paint method which will paint this paddle.
     */
-    @Override 
+    /*@Override 
     public void paintComponent(Graphics g)
     {
         super.paintComponent(g);
@@ -117,7 +117,7 @@ public class Ball extends JPanel implements Runnable
         g.fillOval((int)xCoordinate, (int)yCoordinate, (int)(2 * radius), (int)(2 * radius));
         
     }
-    
+    */
      /*
     * The method that will run a seperate thread.
     */

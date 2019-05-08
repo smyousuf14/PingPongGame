@@ -19,6 +19,7 @@ public class Screen extends JPanel
     // Instance Variables
     private Paddle userPaddle;
     private Paddle opponentPaddle;
+    private Ball ball;
     
     /*
     * Default Constructor
@@ -27,6 +28,7 @@ public class Screen extends JPanel
     {
         userPaddle = new Paddle(400,600,30,90);
         opponentPaddle = new Paddle(400,20,30,90);
+        ball = new Ball(400,400,10);
         
         
     }
@@ -53,6 +55,16 @@ public class Screen extends JPanel
     }
     
     /*
+    * Gets the ball.
+    *
+    *@return ball The ball that is used as a puck
+    */
+    public Ball getBall()
+    {
+        return ball;
+    }
+    
+    /*
     * Paints the screen
     */
     @Override
@@ -68,8 +80,11 @@ public class Screen extends JPanel
         g.fillRect((int)userPaddle.getXValue(), (int)userPaddle.getYValue(), (int)userPaddle.getWidthValue(), (int)userPaddle.getLength());
         
         // Create a blue opponent paddle on the screen.
-        g.setColor(Color.BLUE);
         g.fillRect((int)opponentPaddle.getXValue(), (int)opponentPaddle.getYValue(), (int)opponentPaddle.getWidthValue(), (int)opponentPaddle.getLength());
+        
+        // Create a red ball.
+        g.setColor(Color.RED);
+        g.fillOval((int)ball.getXValue(), (int)ball.getYValue(), (int)(2 * ball.getRadius()), (int)(2 * ball.getRadius()));
         
     }
     

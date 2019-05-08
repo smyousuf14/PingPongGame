@@ -16,9 +16,7 @@ public class Table extends JPanel implements KeyListener
 {
     // Instance Variables
     private JFrame f1; // The Jframe
-    private Paddle opponentPaddle;
     private Thread ballThread;
-    private Ball ball;
     private Screen s1;
         
     /*
@@ -70,7 +68,7 @@ public class Table extends JPanel implements KeyListener
         {
             
             // Move the user paddle to the right.
-            s1.getUserPaddle().moveX(10);
+            s1.getUserPaddle().moveX(30);
             
             // Now repaint
             f1.repaint();
@@ -81,7 +79,7 @@ public class Table extends JPanel implements KeyListener
         if(e.getKeyCode() == 37)
         {
             // Move the user paddle to the left
-            s1.getUserPaddle().moveX(-10);
+            s1.getUserPaddle().moveX(-30);
             
             // Now repaint
             f1.repaint();
