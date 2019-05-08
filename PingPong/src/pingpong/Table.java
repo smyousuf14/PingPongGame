@@ -15,7 +15,6 @@ import javax.swing.*;
 public class Table extends JPanel implements KeyListener
 {
     // Instance Variables
-    private Paddle userPaddle;
     private JFrame f1; // The Jframe
     private Paddle opponentPaddle;
     private Thread ballThread;

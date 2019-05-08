@@ -18,13 +18,15 @@ public class Screen extends JPanel
 {
     // Instance Variables
     private Paddle userPaddle;
+    private Paddle opponentPaddle;
     
     /*
     * Default Constructor
     */
     public Screen()
     {
-        userPaddle = new Paddle(20,600,30,90);
+        userPaddle = new Paddle(400,600,30,90);
+        opponentPaddle = new Paddle(400,20,30,90);
         
         
     }
@@ -41,6 +43,16 @@ public class Screen extends JPanel
     }
     
     /*
+    * Gets the opponentPaddle
+    *
+    *@return opponentPaddle the paddle that the opponent will use
+    */
+    public Paddle getOpponentPaddle()
+    {
+        return opponentPaddle;
+    }
+    
+    /*
     * Paints the screen
     */
     @Override
@@ -51,8 +63,14 @@ public class Screen extends JPanel
         // Set a background colour
         this.setBackground(Color.BLACK);
         
+        // Create a blue user paddle on the screen
         g.setColor(Color.BLUE);
         g.fillRect((int)userPaddle.getXValue(), (int)userPaddle.getYValue(), (int)userPaddle.getWidthValue(), (int)userPaddle.getLength());
+        
+        // Create a blue opponent paddle on the screen.
+        g.setColor(Color.BLUE);
+        g.fillRect((int)opponentPaddle.getXValue(), (int)opponentPaddle.getYValue(), (int)opponentPaddle.getWidthValue(), (int)opponentPaddle.getLength());
+        
     }
     
 }
