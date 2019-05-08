@@ -121,7 +121,7 @@ public class Paddle extends JPanel
     /*
     * The override paint method which will paint this paddle.
     */
-    @Override 
+    /*@Override 
     public void paintComponent(Graphics g)
     {
         super.paintComponent(g);
@@ -132,7 +132,7 @@ public class Paddle extends JPanel
         g.setColor(Color.BLUE);
         g.fillRect((int)xCoordinate, (int)yCoordinate, (int)width, (int)length);
     }
-    
+    */
    
     
     /*

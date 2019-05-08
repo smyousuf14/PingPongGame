@@ -20,6 +20,7 @@ public class Table extends JPanel implements KeyListener
     private Paddle opponentPaddle;
     private Thread ballThread;
     private Ball ball;
+    private Screen s1;
         
     /*
     * Default Constructor
@@ -34,13 +35,15 @@ public class Table extends JPanel implements KeyListener
         
         
         // Now create the user's paddle
-        userPaddle = new Paddle(20,600,30,90);
-        f1.add(userPaddle);
+        //userPaddle = new Paddle(20,600,30,90);
         
-        ball = new Ball(20,20,30);
+        s1 = new Screen();
+        f1.add(s1);
+        
+        /*ball = new Ball(20,20,30);
         ballThread = new Thread(ball);
         ballThread.start();
-        
+        */
         
         // Add the key listeners to the frame.
         f1.addKeyListener(this);
@@ -68,7 +71,7 @@ public class Table extends JPanel implements KeyListener
         {
             
             // Move the user paddle to the right.
-            userPaddle.moveX(10);
+            s1.getUserPaddle().moveX(10);
             
             // Now repaint
             f1.repaint();
@@ -79,7 +82,7 @@ public class Table extends JPanel implements KeyListener
         if(e.getKeyCode() == 37)
         {
             // Move the user paddle to the left
-            userPaddle.moveX(-10);
+            s1.getUserPaddle().moveX(-10);
             
             // Now repaint
             f1.repaint();
