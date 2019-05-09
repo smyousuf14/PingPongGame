@@ -47,6 +47,8 @@ public class Table extends JPanel implements KeyListener,Runnable
         f1.setFocusable(true);
         f1.setFocusTraversalKeysEnabled(false);
         
+        
+        
         f1.validate();
         f1.repaint();
         

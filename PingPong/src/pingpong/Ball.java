@@ -18,6 +18,9 @@ public class Ball extends JPanel implements Runnable
     private double radius;
     private double xCoordinate;
     private double yCoordinate;
+    private double XSpeed;
+    private double YSpeed;
+    private boolean isRunning;
     
     
     /*
@@ -28,6 +31,14 @@ public class Ball extends JPanel implements Runnable
         this.xCoordinate = xCoordinate;
         this.yCoordinate = yCoordinate;
         this.radius = radius;
+        
+        
+        // Set the default values of x and y speed
+        XSpeed = 0;
+        YSpeed = 2;
+        
+        // Set the isRunning boolean value
+        isRunning = true;
         
     }
     
@@ -125,7 +136,22 @@ public class Ball extends JPanel implements Runnable
     public void run()
     {
         /*Move the ball accordingly and make sure to check if it collides with any of the two paddles*/
-        
+        while(isRunning)
+        {
+            //Move the ball with its x and y speeds.
+            xCoordinate += XSpeed;
+            yCoordinate += YSpeed;
+            
+            //Pause for a second.
+            try
+            {
+                Thread.sleep(10);
+            }
+            catch(Exception e)
+            {
+                
+            }
+        }
     }
     
     

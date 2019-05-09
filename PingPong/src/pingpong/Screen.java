@@ -20,6 +20,7 @@ public class Screen extends JPanel
     private Paddle userPaddle;
     private Paddle opponentPaddle;
     private Ball ball;
+    private Thread ballMoving;
     
     /*
     * Default Constructor
@@ -29,6 +30,10 @@ public class Screen extends JPanel
         userPaddle = new Paddle(400,600,30,90);
         opponentPaddle = new Paddle(400,20,30,90);
         ball = new Ball(400,400,10);
+        
+        // Move the ball.
+        ballMoving = new Thread(ball);
+        ballMoving.start();
         
         
     }
