@@ -32,7 +32,7 @@ public class Screen extends JPanel
         ball = new Ball(400,400,10);
        
         //Set the user paddle values
-        ball.setRec(userPaddle.getXValue(), userPaddle.getY(), userPaddle.getWidthValue(), userPaddle.getLength());
+        ball.setRec(userPaddle.getXValue(), userPaddle.getYValue(), userPaddle.getWidthValue(), userPaddle.getLength());
         
         // Move the ball.
         ballMoving = new Thread(ball);

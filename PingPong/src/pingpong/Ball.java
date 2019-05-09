@@ -225,7 +225,7 @@ public class Ball extends JPanel implements Runnable
         boolean isCollision = false;
         
         // check if the circle is within the boundries of the rectangle.
-        if((xCir + radiusCir) <= (xRec + lengthRec) && (xCir - radiusCir) >= xRec)
+       /* if((xCir + radiusCir) <= (xRec + lengthRec) && ((xCir - radiusCir) >= xRec))
         {
             isCollision = true;
         }
@@ -235,7 +235,25 @@ public class Ball extends JPanel implements Runnable
             isCollision = true;
         }
         
-        
+        */
+       
+       // If the circle is to the right of the rectangle, check against the right edge
+       // If the circle is to the left of the square, check against the left edge
+       // If the circle, is above the square, check against the te top edge
+       // If the circle is to the below the square, check against the bottom edge
+       if(((xCir + radiusCir) <= (xRec + lengthRec)) && ( (xCir + radiusCir) >= xRec )  )
+       {
+          
+           if(((yCir + radiusCir) >= yRec ) && ((yCir + radiusCir) <= (yRec + widthRec)) )
+           {
+               isCollision = true;
+                System.out.println("AAAA");
+           }
+       }
+       
+     
+       
+       
         return isCollision;
     }
     
