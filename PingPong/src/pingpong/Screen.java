@@ -30,6 +30,9 @@ public class Screen extends JPanel
         userPaddle = new Paddle(400,600,30,90);
         opponentPaddle = new Paddle(400,20,30,90);
         ball = new Ball(400,400,10);
+       
+        //Set the user paddle values
+        ball.setRec(userPaddle.getXValue(), userPaddle.getY(), userPaddle.getWidthValue(), userPaddle.getLength());
         
         // Move the ball.
         ballMoving = new Thread(ball);

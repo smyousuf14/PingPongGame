@@ -22,6 +22,17 @@ public class Ball extends JPanel implements Runnable
     private double YSpeed;
     private boolean isRunning;
     
+    // User Rectangle value
+    private double xRec;
+    private double yRec;
+    private double recWidth;
+    private double recLenght;
+    
+    // Opponent Rectangle value
+    private double xRecOpponent;
+    private double yRecOpponent;
+    private double recWidthOpponent;
+    private double recLenghtOpponent;
     
     /*
     * Constructor that creates an object with specific parameters 
@@ -93,6 +104,40 @@ public class Ball extends JPanel implements Runnable
     }
     
     /*
+    * Set the values of the rectangle.
+    *
+    *@param xRec the x of the rectangle
+    *@param yRec the y value fo the rectangle
+    *@param widthRec the width of rec
+    *@param lengthRec the length of rec
+    */
+    public void setRec(double xRec, double yRec, double widthRec, double lengthRec)
+    {
+        this.xRec = xRec;
+        this.yRec = yRec;
+        this.recWidth = widthRec;
+        this.recLenght = lengthRec;
+    }
+    
+    /*
+    * Set the values of the rectangle.
+    *
+    *@param xRec the x of the rectangle
+    *@param yRec the y value fo the rectangle
+    *@param widthRec the width of rec
+    *@param lengthRec the length of rec
+    */
+    public void setRecOpponent(double xRec, double yRec, double widthRec, double lengthRec)
+    {
+        this.xRecOpponent = xRec;
+        this.yRecOpponent = yRec;
+        this.recWidthOpponent = widthRec;
+        this.recLenghtOpponent = lengthRec;
+    }
+    
+    
+    
+    /*
     * Move the moveable object in the x direction
     *
     *@param xDisplacement The amount of displacement the object must move in the x direction
@@ -151,7 +196,47 @@ public class Ball extends JPanel implements Runnable
             {
                 
             }
+            
+            // Now check for collisions with the user rectangle and perform appropriate action.
+            if(collisionRecCir(xRec,yRec,recWidth, recLenght,xCoordinate, yCoordinate, radius))
+            {
+                YSpeed = - YSpeed;
+                
+            }
         }
+    }
+    
+    /*
+    * A collision detection method between a rectangle and circle.
+    *
+    *@param XRec The x value of the rectangle
+    *@param YRec The y value of the rectangle
+    *@param WidthRec The width of the rectangle
+    *@param LengthRec the length of the rectangle
+    *@param XCir The x value of the circle
+    *@param YCir the y value of the circle
+    *@param RadiusCir the radius of the circle
+    *@return isCollide If the rectangle and circle collide
+    */
+    private boolean collisionRecCir(double xRec, double yRec, double widthRec, 
+            double lengthRec, double xCir, double yCir, double radiusCir)
+    {
+        // Local Variable
+        boolean isCollision = false;
+        
+        // check if the circle is within the boundries of the rectangle.
+        if((xCir + radiusCir) <= (xRec + lengthRec) && (xCir - radiusCir) >= xRec)
+        {
+            isCollision = true;
+        }
+        
+        if(((yCir + radiusCir) <= yRec) &&(yCir - radiusCir) >= (yRec + widthRec) )
+        {
+            isCollision = true;
+        }
+        
+        
+        return isCollision;
     }
     
     
@@ -171,9 +256,9 @@ public class Ball extends JPanel implements Runnable
     */
     public static void main(String[]args)
     {
-        Ball p1 = new Ball(10,20, 50);
+        Ball p1 = new Ball(5,5, 5);
         
-        JFrame f1 = new JFrame("Ping Pong");
+        /*JFrame f1 = new JFrame("Ping Pong");
         f1.setSize(900,900);
         f1.setVisible(true);
         f1.add(p1);
@@ -191,7 +276,10 @@ public class Ball extends JPanel implements Runnable
         p1.moveX(200);
         
         f1.validate();
-        f1.repaint();
+        f1.repaint();*/
+        
+        p1.setRec(10, 10,2, 2);
+        System.out.println(p1.collisionRecCir(5, 5, 2, 2, 5, 5, 5));
         
     }
     
