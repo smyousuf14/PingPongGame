@@ -117,10 +117,11 @@ public class Table extends JPanel implements KeyListener,Runnable
     @Override
     public void run()
     {
-        // Continuously repaint the window
+        // Continuously repaint the window and set rec values
         while(true)
         {
             f1.repaint();
+            s1.setRecValues();
         }
     }
    

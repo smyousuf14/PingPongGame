@@ -190,7 +190,7 @@ public class Ball extends JPanel implements Runnable
             //Pause for a second.
             try
             {
-                Thread.sleep(10);
+                Thread.sleep(5);
             }
             catch(Exception e)
             {
@@ -199,6 +199,13 @@ public class Ball extends JPanel implements Runnable
             
             // Now check for collisions with the user rectangle and perform appropriate action.
             if(collisionRecCir(xRec,yRec,recWidth, recLenght,xCoordinate, yCoordinate, radius))
+            {
+                YSpeed = - YSpeed;
+                
+            }
+            
+            // Now check for collisions with the opponent rectangle and perform appropriate actions.
+            if(collisionRecCir(xRecOpponent,yRecOpponent,recWidthOpponent, recLenghtOpponent,xCoordinate, yCoordinate, radius))
             {
                 YSpeed = - YSpeed;
                 
@@ -244,10 +251,18 @@ public class Ball extends JPanel implements Runnable
        if(((xCir + radiusCir) <= (xRec + lengthRec)) && ( (xCir + radiusCir) >= xRec )  )
        {
           
-           if(((yCir + radiusCir) >= yRec ) && ((yCir + radiusCir) <= (yRec + widthRec)) )
+           if(((yCir + radiusCir)  > yRec ) && ((yCir + radiusCir) <= (yRec + widthRec)) )
            {
                isCollision = true;
-                System.out.println("AAAA");
+           }
+       }
+       
+       if(((xCir) <= (xRec + lengthRec)) && ( (xCir) >= xRec )  )
+       {
+          
+           if(((yCir + radiusCir)  > yRec ) && ((yCir + radiusCir) <= (yRec + widthRec)) )
+           {
+               isCollision = true;
            }
        }
        

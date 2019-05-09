@@ -31,9 +31,7 @@ public class Screen extends JPanel
         opponentPaddle = new Paddle(400,20,30,90);
         ball = new Ball(400,400,10);
        
-        //Set the user paddle values
-        ball.setRec(userPaddle.getXValue(), userPaddle.getYValue(), userPaddle.getWidthValue(), userPaddle.getLength());
-        
+        setRecValues();
         // Move the ball.
         ballMoving = new Thread(ball);
         ballMoving.start();
@@ -70,6 +68,19 @@ public class Screen extends JPanel
     public Ball getBall()
     {
         return ball;
+    }
+    
+    /*
+    * Sets the users and oppoenent rec values
+    */
+    public void setRecValues()
+    {
+        //Set the user paddle values
+        ball.setRec(userPaddle.getXValue(), userPaddle.getYValue(), userPaddle.getWidthValue(), userPaddle.getLength());
+        
+        // Set the opponent paddle values
+        ball.setRecOpponent(opponentPaddle.getXValue(), opponentPaddle.getYValue(), opponentPaddle.getWidthValue(), opponentPaddle.getLength());
+        
     }
     
     /*
