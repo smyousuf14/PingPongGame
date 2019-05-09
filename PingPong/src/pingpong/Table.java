@@ -12,7 +12,7 @@ import javax.swing.*;
  *
  * @author Syed Yousuf
  */
-public class Table extends JPanel implements KeyListener
+public class Table extends JPanel implements KeyListener,Runnable
 {
     // Instance Variables
     private JFrame f1; // The Jframe
@@ -109,7 +109,18 @@ public class Table extends JPanel implements KeyListener
         e.consume();
     }
     
-    
+    /*
+    * It runs on a seperate thread
+    */
+    @Override
+    public void run()
+    {
+        // Continuously repaint the window
+        while(true)
+        {
+            f1.repaint();
+        }
+    }
    
     
     
@@ -119,6 +130,11 @@ public class Table extends JPanel implements KeyListener
     public static void main(String[]args)
     {
         Table PongTable = new Table();
+        
+        
+        Thread screenThread = new Thread(PongTable);
+        
+        screenThread.start();
         
         
     }
