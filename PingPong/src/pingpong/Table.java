@@ -88,6 +88,29 @@ public class Table extends JPanel implements KeyListener,Runnable
             
             e.consume();
         }
+        else
+        if(e.getKeyCode() == 65)
+        {
+            // Temp
+            // Move the opponent paddle to the left
+            s1.getOpponentPaddle().moveX(-30);
+            
+            f1.repaint();
+            
+            e.consume();
+        }
+        else
+        if(e.getKeyCode() == 68)
+        {
+            // Temp
+            // Move the opponent paddle to the right
+            s1.getOpponentPaddle().moveX(30);
+            
+            f1.repaint();
+            
+            e.consume();
+        }
+            
         
     }
     
