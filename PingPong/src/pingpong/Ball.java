@@ -248,6 +248,9 @@ public class Ball extends JPanel implements Runnable
                 if(velocityDirection.equals(""))
                 {
                     YSpeed = - YSpeed;
+                    
+                    //Set time back to the original value
+                    time = 5;
                 }
                 else
                 if(velocityDirection.equals("right"))
@@ -255,6 +258,16 @@ public class Ball extends JPanel implements Runnable
                     // Move diagonal
                     XSpeed = 2;
                     YSpeed = -YSpeed;
+                    
+                    // Increase time properly
+                    if(time == 1)
+                    {
+                        time = 1;
+                    }
+                    else
+                    {
+                        time--;
+                    }
                 }
                 else
                 if(velocityDirection.equals("left"))
@@ -262,6 +275,16 @@ public class Ball extends JPanel implements Runnable
                     //Move diagonal
                     XSpeed = -2;
                     YSpeed = -YSpeed;
+                            
+                    // Increase time properly
+                    if(time == 1)
+                    {
+                        time = 1;
+                    }
+                    else
+                    {
+                        time--;
+                    }
                 }
                 
             }
@@ -273,6 +296,9 @@ public class Ball extends JPanel implements Runnable
                 if(velocityDirection.equals(""))
                 {
                     YSpeed = - YSpeed;
+                    
+                    //Set time back to the original value
+                    time = 5;
                 }
                 else
                 if(velocityDirection.equals("right"))
@@ -280,6 +306,16 @@ public class Ball extends JPanel implements Runnable
                     // Move diagonal
                     XSpeed = 2;
                     YSpeed = -YSpeed;
+                    
+                    // Increase time properly
+                    if(time == 1)
+                    {
+                        time = 1;
+                    }
+                    else
+                    {
+                        time--;
+                    }
                 }
                 else
                 if(velocityDirection.equals("left"))
@@ -287,6 +323,16 @@ public class Ball extends JPanel implements Runnable
                     //Move diagonal
                     XSpeed = -2;
                     YSpeed = -YSpeed;
+                    
+                    // Increase time properly
+                    if(time == 1)
+                    {
+                        time = 1;
+                    }
+                    else
+                    {
+                        time--;
+                    }
                 }
                 
             }
@@ -298,7 +344,7 @@ public class Ball extends JPanel implements Runnable
                 
             }
             
-            if(xCoordinate >= 890)
+            if(xCoordinate >= 870)
             {
                 XSpeed = -2;
             }

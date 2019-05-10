@@ -18,7 +18,7 @@ public class Table extends JPanel implements KeyListener,Runnable
     private JFrame f1; // The Jframe
     private Thread ballThread;
     private Screen s1;
-        
+    
     /*
     * Default Constructor
     */
@@ -70,11 +70,21 @@ public class Table extends JPanel implements KeyListener,Runnable
         {
             
             // Move the user paddle to the right.
-            s1.getUserPaddle().moveX(30);
+            s1.getUserPaddle().moveX(s1.getUserPaddle().getPaddleSpeed());
             
             // Also set the velocity direction
             s1.getBall().setVelocityDirection("right");
             
+            // Now increase the paddle speed if possible
+            if(s1.getUserPaddle().getPaddleSpeed() >= 60)
+            {
+                // Set to 60
+                s1.getUserPaddle().setPaddleSpeed(60);
+            }
+            else
+            {
+                s1.getUserPaddle().setPaddleSpeed((s1.getUserPaddle().getPaddleSpeed()) + 3);
+            }
             // Now repaint
             f1.repaint();
             
@@ -84,10 +94,21 @@ public class Table extends JPanel implements KeyListener,Runnable
         if(e.getKeyCode() == 37)
         {
             // Move the user paddle to the left
-            s1.getUserPaddle().moveX(-30);
+            s1.getUserPaddle().moveX(-(s1.getUserPaddle().getPaddleSpeed()));
             
             // Also set the velocity direction
             s1.getBall().setVelocityDirection("left");
+            
+            // Now increase the paddle speed if possible
+            if(s1.getUserPaddle().getPaddleSpeed() >= 60)
+            {
+                // Set to 60
+                s1.getUserPaddle().setPaddleSpeed(60);
+            }
+            else
+            {
+                s1.getUserPaddle().setPaddleSpeed((s1.getUserPaddle().getPaddleSpeed()) + 3);
+            }
             
             // Now repaint
             f1.repaint();
@@ -99,7 +120,7 @@ public class Table extends JPanel implements KeyListener,Runnable
         {
             // Temp
             // Move the opponent paddle to the left
-            s1.getOpponentPaddle().moveX(-30);
+            s1.getOpponentPaddle().moveX(-(s1.getOpponentPaddle().getPaddleSpeed()));
             
             // Also set the velocity direction
             s1.getBall().setVelocityDirection("left");
@@ -114,7 +135,7 @@ public class Table extends JPanel implements KeyListener,Runnable
         {
             // Temp
             // Move the opponent paddle to the right
-            s1.getOpponentPaddle().moveX(30);
+            s1.getOpponentPaddle().moveX(s1.getOpponentPaddle().getPaddleSpeed());
             
             // Also set the velocity direction
             s1.getBall().setVelocityDirection("right");

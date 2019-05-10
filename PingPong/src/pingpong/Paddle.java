@@ -18,6 +18,7 @@ public class Paddle extends JPanel
     private double width;
     private double xCoordinate;
     private double yCoordinate;
+    private int paddleSpeed;
     
     
     /*
@@ -35,6 +36,9 @@ public class Paddle extends JPanel
         this.yCoordinate = yCoordinate;
         this.length = length;
         this.width = width;
+        
+        // The default value for paddle speed is 30
+        this.paddleSpeed = 30;
         
     }
     
@@ -79,6 +83,16 @@ public class Paddle extends JPanel
     }
     
     /*
+    * Get the paddle speed
+    *
+    *@return paddleSpeed The speed of the paddle 
+    */
+    public int getPaddleSpeed()
+    {
+        return paddleSpeed;
+    }
+    
+    /*
     * A setter method which sets the x coordinate value of the moveable object
     *
     *@param xCoordinate The new x coordinate value
@@ -116,6 +130,16 @@ public class Paddle extends JPanel
     public void moveY(int yDisplacement)
     {
         yCoordinate += yDisplacement;
+    }
+    
+    /*
+    * Set the paddle speed
+    *
+    *@param paddleSpeed The speed of the paddle
+    */
+    public void setPaddleSpeed(int paddleSpeed)
+    {
+        this.paddleSpeed = paddleSpeed;
     }
     
     /*
