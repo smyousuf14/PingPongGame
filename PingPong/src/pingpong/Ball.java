@@ -21,6 +21,8 @@ public class Ball extends JPanel implements Runnable
     private double XSpeed;
     private double YSpeed;
     private boolean isRunning;
+    private String velocityDirection;
+    private int time;
     
     // User Rectangle value
     private double xRec;
@@ -50,6 +52,12 @@ public class Ball extends JPanel implements Runnable
         
         // Set the isRunning boolean value
         isRunning = true;
+        
+        // Set the time
+        time = 5;
+        
+        // Set the velocity direction
+        velocityDirection = "";
         
     }
     
@@ -84,6 +92,16 @@ public class Ball extends JPanel implements Runnable
     }
     
     /*
+    * Gets the value of the velocity direction
+    *
+    *@return the direction of the velocity
+    */
+    public String getVelocityDirection()
+    {
+        return velocityDirection;
+    }
+    
+    /*
     * A setter method which sets the x coordinate value of the moveable object
     *
     *@param xCoordinate The new x coordinate value
@@ -102,6 +120,32 @@ public class Ball extends JPanel implements Runnable
     {
         this.yCoordinate = yCoordinate;
     }
+    
+    
+    /*
+    * Set the value of the velocity direction.
+    *
+    *@param newDirection the new direction
+    */
+    public void setVelocityDirection(String newDirection)
+    {
+        // only set if "", "left", or "right"
+        if(newDirection.equals(""))
+        {
+            this.velocityDirection = "";
+        }
+        else
+        if(newDirection.equals("right"))
+        {
+            this.velocityDirection = "right";
+        }
+        else
+        if(newDirection.equals("left"))
+        {
+            this.velocityDirection = "left";
+        }
+    }
+    
     
     /*
     * Set the values of the rectangle.
@@ -190,7 +234,7 @@ public class Ball extends JPanel implements Runnable
             //Pause for a second.
             try
             {
-                Thread.sleep(5);
+                Thread.sleep(time);
             }
             catch(Exception e)
             {
@@ -198,17 +242,65 @@ public class Ball extends JPanel implements Runnable
             }
             
             // Now check for collisions with the user rectangle and perform appropriate action.
-            if(collisionRecCir(xRec,yRec,recWidth, recLenght,xCoordinate, yCoordinate, radius))
+            if(collisionRecCir(xRec,yRec,recWidth, (recLenght + 50),xCoordinate, yCoordinate, radius))
             {
-                YSpeed = - YSpeed;
+                // Check if there is any velocity direction involved
+                if(velocityDirection.equals(""))
+                {
+                    YSpeed = - YSpeed;
+                }
+                else
+                if(velocityDirection.equals("right"))
+                {
+                    // Move diagonal
+                    XSpeed = 2;
+                    YSpeed = -YSpeed;
+                }
+                else
+                if(velocityDirection.equals("left"))
+                {
+                    //Move diagonal
+                    XSpeed = -2;
+                    YSpeed = -YSpeed;
+                }
                 
             }
             
             // Now check for collisions with the opponent rectangle and perform appropriate actions.
-            if(collisionRecCir(xRecOpponent,yRecOpponent,recWidthOpponent, recLenghtOpponent,xCoordinate, yCoordinate, radius))
+            if(collisionRecCir(xRecOpponent,yRecOpponent,(recWidthOpponent - 50), (recLenghtOpponent + 50),xCoordinate, yCoordinate, radius))
             {
-                YSpeed = - YSpeed;
+                // Check if there is any velocity direction involved
+                if(velocityDirection.equals(""))
+                {
+                    YSpeed = - YSpeed;
+                }
+                else
+                if(velocityDirection.equals("right"))
+                {
+                    // Move diagonal
+                    XSpeed = 2;
+                    YSpeed = -YSpeed;
+                }
+                else
+                if(velocityDirection.equals("left"))
+                {
+                    //Move diagonal
+                    XSpeed = -2;
+                    YSpeed = -YSpeed;
+                }
                 
+            }
+            
+            // Now test for boundary conditions. Assume that the screen is always 900*900
+            if(xCoordinate <= 0)
+            {
+                XSpeed = 2;
+                
+            }
+            
+            if(xCoordinate >= 890)
+            {
+                XSpeed = -2;
             }
         }
     }

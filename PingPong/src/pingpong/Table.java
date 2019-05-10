@@ -72,6 +72,9 @@ public class Table extends JPanel implements KeyListener,Runnable
             // Move the user paddle to the right.
             s1.getUserPaddle().moveX(30);
             
+            // Also set the velocity direction
+            s1.getBall().setVelocityDirection("right");
+            
             // Now repaint
             f1.repaint();
             
@@ -82,6 +85,9 @@ public class Table extends JPanel implements KeyListener,Runnable
         {
             // Move the user paddle to the left
             s1.getUserPaddle().moveX(-30);
+            
+            // Also set the velocity direction
+            s1.getBall().setVelocityDirection("left");
             
             // Now repaint
             f1.repaint();
@@ -95,6 +101,10 @@ public class Table extends JPanel implements KeyListener,Runnable
             // Move the opponent paddle to the left
             s1.getOpponentPaddle().moveX(-30);
             
+            // Also set the velocity direction
+            s1.getBall().setVelocityDirection("left");
+            
+            
             f1.repaint();
             
             e.consume();
@@ -105,6 +115,10 @@ public class Table extends JPanel implements KeyListener,Runnable
             // Temp
             // Move the opponent paddle to the right
             s1.getOpponentPaddle().moveX(30);
+            
+            // Also set the velocity direction
+            s1.getBall().setVelocityDirection("right");
+            
             
             f1.repaint();
             
@@ -120,7 +134,8 @@ public class Table extends JPanel implements KeyListener,Runnable
     @Override
     public void keyReleased(KeyEvent e)
     {
-        // Nothing
+        // Also set the velocity direction
+        s1.getBall().setVelocityDirection("");
         e.consume();
     }
     
