@@ -21,6 +21,7 @@ public class Screen extends JPanel
     private Paddle opponentPaddle;
     private Ball ball;
     private Thread ballMoving;
+    private String winner;
     
     
     /*
@@ -28,6 +29,7 @@ public class Screen extends JPanel
     */
     public Screen()
     {
+        winner = "";
         userPaddle = new Paddle(400,600,30,90);
         opponentPaddle = new Paddle(400,20,30,90);
         ball = new Ball(400,400,10);
@@ -36,6 +38,7 @@ public class Screen extends JPanel
         // Move the ball.
         ballMoving = new Thread(ball);
         ballMoving.start();
+        
         
         
     }
@@ -72,6 +75,16 @@ public class Screen extends JPanel
     }
     
     /*
+    * Gets the winner
+    *
+    *@return Winner of the game.
+    */
+    public String getWinner()
+    {
+        return winner;
+    }
+    
+    /*
     * Sets the users and oppoenent rec values
     */
     public void setRecValues()
@@ -83,6 +96,18 @@ public class Screen extends JPanel
         ball.setRecOpponent(opponentPaddle.getXValue(), opponentPaddle.getYValue(), opponentPaddle.getWidthValue(), opponentPaddle.getLength());
         
     }
+    
+    /*
+    * Set the value of the winner
+    *
+    *@param winner The value of the winner
+    */
+    public void setWinner(String winner)
+    {
+        this.winner = winner;
+    }
+    
+    
     
     /*
     * Paints the screen
@@ -109,8 +134,17 @@ public class Screen extends JPanel
         // Create the scores.
         g.setColor(Color.WHITE);
         g.setFont(new Font("TimesRoman", Font.PLAIN,30));
-        g.drawString("" + ball.getScoreUser(), 50, 50);
+        g.drawString("" + ball.getScoreUser(), 50, 400);
         
+        g.setFont(new Font("TimesRoman", Font.PLAIN,30));
+        g.drawString("" + ball.getScoreOpponent(), 50, 50);
+        
+        // Set the winner if the game is over.
+        if(ball.getifRunning() == false)
+        {
+            g.setFont(new Font("TimesRoman", Font.PLAIN,200));
+            g.drawString("" + winner, 100, 350);
+        }
     }
     
 }

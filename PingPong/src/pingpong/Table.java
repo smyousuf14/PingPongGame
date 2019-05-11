@@ -26,7 +26,7 @@ public class Table extends JPanel implements KeyListener,Runnable
     public Table()
     {
         // Set isRunning to true.
-        isRunning = true;
+        isRunning = false;
         
         // Create a new window
         f1 = new JFrame("Ping Pong");
@@ -45,7 +45,17 @@ public class Table extends JPanel implements KeyListener,Runnable
         ballThread = new Thread(ball);
         ballThread.start();
         */
-                
+        
+        try 
+        {
+            Thread.currentThread().sleep(2000);
+        } catch (InterruptedException ie) 
+        {
+            //None.
+            
+        }
+        
+        
         // Add the key listeners to the frame.
         f1.addKeyListener(this);
         f1.setFocusable(true);
@@ -55,8 +65,9 @@ public class Table extends JPanel implements KeyListener,Runnable
         f1.validate();
         f1.repaint();
         
-        
-        
+        // Start the ball.
+        s1.getBall().setIsRunning(true);
+        isRunning = true;
         
        
     }
@@ -206,7 +217,7 @@ public class Table extends JPanel implements KeyListener,Runnable
     {
         // Continuously repaint the window and set rec values
         // Also, check if the score has reached the limit. either player gets a score of 5 to win.
-        while(true)
+        while(isRunning)
         {
             f1.repaint();
             s1.setRecValues();
@@ -218,11 +229,17 @@ public class Table extends JPanel implements KeyListener,Runnable
             if(s1.getBall().getScoreUser() == 5)
             {
                 // User wins
+                s1.setWinner("You win!");
+                isRunning = false;
+                s1.getBall().setIsRunning(false);
             }
             else
             if(s1.getBall().getScoreOpponent() == 5)
             {
                 // Opponent wins
+                s1.setWinner("Opponent wins...");
+                isRunning = false;
+                s1.getBall().setIsRunning(false);
             }
             
         }

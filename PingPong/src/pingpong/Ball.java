@@ -41,6 +41,7 @@ public class Ball extends JPanel implements Runnable
     private int scoreUser;
     private int scoreOpponent;
     
+    
     /*
     * Constructor that creates an object with specific parameters 
     */
@@ -50,6 +51,7 @@ public class Ball extends JPanel implements Runnable
         this.yCoordinate = yCoordinate;
         this.radius = radius;
         
+        isRunning = false;
         
         // Set the default values of x and y speed
         XSpeed = 0;
@@ -144,6 +146,16 @@ public class Ball extends JPanel implements Runnable
     }
     
     /*
+    * Get the value of isRunning
+    *
+    *@return isRunning
+    */
+    public boolean getifRunning()
+    {
+        return isRunning;
+    }
+    
+    /*
     * A setter method which sets the x coordinate value of the moveable object
     *
     *@param xCoordinate The new x coordinate value
@@ -153,6 +165,15 @@ public class Ball extends JPanel implements Runnable
         this.xCoordinate = xCoordinate;
     }
     
+    /*
+    * Set is running
+    *
+    *@param isRunning if the ball is still running 
+    */
+    public void setIsRunning(boolean isRunning)
+    {
+        this.isRunning = isRunning;
+    }
     /*
     * A setter method which sets the y coordinate value of the moveable object
     *
@@ -435,7 +456,7 @@ public class Ball extends JPanel implements Runnable
                 //Wait a second.
                 try 
                 {
-                    Thread.currentThread().sleep(2000);
+                    Thread.currentThread().sleep(1000);
                 } catch (InterruptedException ie) 
                 {
                     //None.
@@ -458,7 +479,7 @@ public class Ball extends JPanel implements Runnable
                 //Wait a second.
                 try 
                 {
-                    Thread.currentThread().sleep(2000);
+                    Thread.currentThread().sleep(1000);
                 } catch (InterruptedException ie) 
                 {
                     //None.
