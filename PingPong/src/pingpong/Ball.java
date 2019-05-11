@@ -23,6 +23,7 @@ public class Ball extends JPanel implements Runnable
     private boolean isRunning;
     private String velocityDirection;
     private int time;
+    private int angle;
     
     // User Rectangle value
     private double xRec;
@@ -35,6 +36,10 @@ public class Ball extends JPanel implements Runnable
     private double yRecOpponent;
     private double recWidthOpponent;
     private double recLenghtOpponent;
+    
+    // Score instance variable
+    private int scoreUser;
+    private int scoreOpponent;
     
     /*
     * Constructor that creates an object with specific parameters 
@@ -58,6 +63,13 @@ public class Ball extends JPanel implements Runnable
         
         // Set the velocity direction
         velocityDirection = "";
+        
+        // Set the default angle which is 2.
+        angle = 2;
+        
+        // Set to default value of the score to 0
+        scoreUser = 0;
+        scoreOpponent = 0;
         
     }
     
@@ -102,6 +114,36 @@ public class Ball extends JPanel implements Runnable
     }
     
     /*
+    * Gets the value of the angle
+    *
+    *@return the value of the angle
+    */
+    public int getAngle()
+    {
+        return angle;
+    }
+    
+    /*
+    * Gets the value of the score of the user
+    *
+    * @return The score of the ball for the user
+    */
+    public int getScoreUser()
+    {
+        return scoreUser;
+    }
+    
+    /*
+    * Gets the value of the score of the opponent
+    *
+    *@return The score of the ball for the opponent
+    */
+    public int getScoreOpponent()
+    {
+        return scoreOpponent;
+    }
+    
+    /*
     * A setter method which sets the x coordinate value of the moveable object
     *
     *@param xCoordinate The new x coordinate value
@@ -121,6 +163,35 @@ public class Ball extends JPanel implements Runnable
         this.yCoordinate = yCoordinate;
     }
     
+    /*
+    * Set the of the angle
+    *
+    *@param angle The angle that the ball was going at
+    */
+    public void setAngle(int angle)
+    {
+        this.angle = angle;
+    }
+    
+    /*
+    * Sets the value of the score of the user.
+    *
+    *@param score The new value of the score
+    */
+    public void setScoreUser(int score)
+    {
+        this.scoreUser = score;
+    }
+    
+    /*
+    * Sets the value of the score of the opponent.
+    *
+    *@param score The new value of the score
+    */
+    public void setScoreOpponent(int score)
+    {
+        this.scoreOpponent = score;
+    }
     
     /*
     * Set the value of the velocity direction.
@@ -256,7 +327,7 @@ public class Ball extends JPanel implements Runnable
                 if(velocityDirection.equals("right"))
                 {
                     // Move diagonal
-                    XSpeed = 2;
+                    XSpeed = angle;
                     YSpeed = -YSpeed;
                     
                     // Increase time properly
@@ -273,7 +344,7 @@ public class Ball extends JPanel implements Runnable
                 if(velocityDirection.equals("left"))
                 {
                     //Move diagonal
-                    XSpeed = -2;
+                    XSpeed = -angle;
                     YSpeed = -YSpeed;
                             
                     // Increase time properly
@@ -304,7 +375,7 @@ public class Ball extends JPanel implements Runnable
                 if(velocityDirection.equals("right"))
                 {
                     // Move diagonal
-                    XSpeed = 2;
+                    XSpeed = angle;
                     YSpeed = -YSpeed;
                     
                     // Increase time properly
@@ -321,7 +392,7 @@ public class Ball extends JPanel implements Runnable
                 if(velocityDirection.equals("left"))
                 {
                     //Move diagonal
-                    XSpeed = -2;
+                    XSpeed = -angle;
                     YSpeed = -YSpeed;
                     
                     // Increase time properly
@@ -340,13 +411,40 @@ public class Ball extends JPanel implements Runnable
             // Now test for boundary conditions. Assume that the screen is always 900*900
             if(xCoordinate <= 0)
             {
-                XSpeed = 2;
+                XSpeed = angle;
                 
             }
             
             if(xCoordinate >= 870)
             {
-                XSpeed = -2;
+                XSpeed = -angle;
+            }
+            
+            // Check if the user got a score
+            if(yCoordinate <= 0)
+            {
+                // Add to the user score
+                scoreUser++;
+                
+                // Go to the next round.
+                xCoordinate = 400;
+                yCoordinate = 400;
+                XSpeed = 0;
+                YSpeed = 2;
+                
+            }
+            // Check if the opponent got a score, assuming that the screen is 900*900
+            if(yCoordinate >= 900)
+            {
+                // Add to the opponent score
+                scoreOpponent++;
+                
+                // Go to the next round.
+                xCoordinate = 400;
+                yCoordinate = 400;
+                XSpeed = 0;
+                YSpeed = -2;
+                
             }
         }
     }

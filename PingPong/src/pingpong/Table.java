@@ -18,12 +18,16 @@ public class Table extends JPanel implements KeyListener,Runnable
     private JFrame f1; // The Jframe
     private Thread ballThread;
     private Screen s1;
+    private boolean isRunning;
     
     /*
     * Default Constructor
     */
     public Table()
     {
+        // Set isRunning to true.
+        isRunning = true;
+        
         // Create a new window
         f1 = new JFrame("Ping Pong");
         f1.setSize(900,900);
@@ -68,6 +72,8 @@ public class Table extends JPanel implements KeyListener,Runnable
         // When the user presses the right key the users paddle should move to the right.
         if(e.getKeyCode() == 39)
         {
+            // Change the angle accordingly
+            s1.getBall().setAngle((s1.getUserPaddle().getPaddleSpeed()  / 10) - 1 );
             
             // Move the user paddle to the right.
             s1.getUserPaddle().moveX(s1.getUserPaddle().getPaddleSpeed());
@@ -93,6 +99,11 @@ public class Table extends JPanel implements KeyListener,Runnable
         else
         if(e.getKeyCode() == 37)
         {
+            
+            // Change the angle accordingly
+            s1.getBall().setAngle((s1.getUserPaddle().getPaddleSpeed()  / 10) - 1 );
+            
+            
             // Move the user paddle to the left
             s1.getUserPaddle().moveX(-(s1.getUserPaddle().getPaddleSpeed()));
             
@@ -118,12 +129,26 @@ public class Table extends JPanel implements KeyListener,Runnable
         else
         if(e.getKeyCode() == 65)
         {
-            // Temp
+            
+            // Change the angle accordingly
+            s1.getBall().setAngle((s1.getUserPaddle().getPaddleSpeed()  / 10) - 1 );
+            
             // Move the opponent paddle to the left
             s1.getOpponentPaddle().moveX(-(s1.getOpponentPaddle().getPaddleSpeed()));
             
             // Also set the velocity direction
             s1.getBall().setVelocityDirection("left");
+            
+            // Now increase the paddle speed if possible
+            if(s1.getOpponentPaddle().getPaddleSpeed() >= 60)
+            {
+                // Set to 60
+                s1.getOpponentPaddle().setPaddleSpeed(60);
+            }
+            else
+            {
+                s1.getOpponentPaddle().setPaddleSpeed((s1.getOpponentPaddle().getPaddleSpeed()) + 3);
+            }
             
             
             f1.repaint();
@@ -133,7 +158,9 @@ public class Table extends JPanel implements KeyListener,Runnable
         else
         if(e.getKeyCode() == 68)
         {
-            // Temp
+            // Change the angle accordingly
+            s1.getBall().setAngle((s1.getUserPaddle().getPaddleSpeed()  / 10) - 1 );
+            
             // Move the opponent paddle to the right
             s1.getOpponentPaddle().moveX(s1.getOpponentPaddle().getPaddleSpeed());
             
@@ -177,10 +204,23 @@ public class Table extends JPanel implements KeyListener,Runnable
     public void run()
     {
         // Continuously repaint the window and set rec values
+        // Also, check if the score has reached the limit. either player gets a score of 5 to win.
         while(true)
         {
             f1.repaint();
             s1.setRecValues();
+            
+            // Check the score for each player
+            if(s1.getBall().getScoreUser() == 5)
+            {
+                // User wins
+            }
+            else
+            if(s1.getBall().getScoreOpponent() == 5)
+            {
+                // Opponent wins
+            }
+            
         }
     }
    

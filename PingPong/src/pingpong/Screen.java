@@ -22,6 +22,7 @@ public class Screen extends JPanel
     private Ball ball;
     private Thread ballMoving;
     
+    
     /*
     * Default Constructor
     */
