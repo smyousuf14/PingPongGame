@@ -106,6 +106,11 @@ public class Screen extends JPanel
         g.setColor(Color.RED);
         g.fillOval((int)ball.getXValue(), (int)ball.getYValue(), (int)(2 * ball.getRadius()), (int)(2 * ball.getRadius()));
         
+        // Create the scores.
+        g.setColor(Color.WHITE);
+        g.setFont(new Font("TimesRoman", Font.PLAIN,30));
+        g.drawString("" + ball.getScoreUser(), 50, 50);
+        
     }
     
 }

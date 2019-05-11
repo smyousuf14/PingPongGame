@@ -432,6 +432,16 @@ public class Ball extends JPanel implements Runnable
                 XSpeed = 0;
                 YSpeed = 2;
                 
+                //Wait a second.
+                try 
+                {
+                    Thread.currentThread().sleep(2000);
+                } catch (InterruptedException ie) 
+                {
+                    //None.
+            
+                }
+                
             }
             // Check if the opponent got a score, assuming that the screen is 900*900
             if(yCoordinate >= 900)
@@ -444,6 +454,16 @@ public class Ball extends JPanel implements Runnable
                 yCoordinate = 400;
                 XSpeed = 0;
                 YSpeed = -2;
+                
+                //Wait a second.
+                try 
+                {
+                    Thread.currentThread().sleep(2000);
+                } catch (InterruptedException ie) 
+                {
+                    //None.
+            
+                }
                 
             }
         }

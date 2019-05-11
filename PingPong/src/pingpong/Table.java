@@ -45,16 +45,17 @@ public class Table extends JPanel implements KeyListener,Runnable
         ballThread = new Thread(ball);
         ballThread.start();
         */
-        
+                
         // Add the key listeners to the frame.
         f1.addKeyListener(this);
         f1.setFocusable(true);
         f1.setFocusTraversalKeysEnabled(false);
         
         
-        
         f1.validate();
         f1.repaint();
+        
+        
         
         
        
@@ -209,6 +210,9 @@ public class Table extends JPanel implements KeyListener,Runnable
         {
             f1.repaint();
             s1.setRecValues();
+            
+            // Set the user and opponent score
+            
             
             // Check the score for each player
             if(s1.getBall().getScoreUser() == 5)
