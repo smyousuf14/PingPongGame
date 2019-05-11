@@ -352,9 +352,9 @@ public class Ball extends JPanel implements Runnable
                     YSpeed = -YSpeed;
                     
                     // Increase time properly
-                    if(time == 1)
+                    if(time == 3)
                     {
-                        time = 1;
+                        time = 3;
                     }
                     else
                     {
@@ -369,9 +369,9 @@ public class Ball extends JPanel implements Runnable
                     YSpeed = -YSpeed;
                             
                     // Increase time properly
-                    if(time == 1)
+                    if(time == 3)
                     {
-                        time = 1;
+                        time = 3;
                     }
                     else
                     {
@@ -400,9 +400,9 @@ public class Ball extends JPanel implements Runnable
                     YSpeed = -YSpeed;
                     
                     // Increase time properly
-                    if(time == 1)
+                    if(time == 3)
                     {
-                        time = 1;
+                        time = 3;
                     }
                     else
                     {
@@ -417,9 +417,9 @@ public class Ball extends JPanel implements Runnable
                     YSpeed = -YSpeed;
                     
                     // Increase time properly
-                    if(time == 1)
+                    if(time == 3)
                     {
-                        time = 1;
+                        time = 3;
                     }
                     else
                     {

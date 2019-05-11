@@ -237,7 +237,7 @@ public class Table extends JPanel implements KeyListener,Runnable
             if(s1.getBall().getScoreOpponent() == 5)
             {
                 // Opponent wins
-                s1.setWinner("Opponent wins...");
+                s1.setWinner("You Lose!");
                 isRunning = false;
                 s1.getBall().setIsRunning(false);
             }

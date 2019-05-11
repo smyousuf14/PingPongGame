@@ -143,7 +143,7 @@ public class Screen extends JPanel
         if(ball.getifRunning() == false)
         {
             g.setFont(new Font("TimesRoman", Font.PLAIN,200));
-            g.drawString("" + winner, 100, 350);
+            g.drawString("" + winner, 50, 350);
         }
     }
     
