@@ -14,7 +14,7 @@ import javax.swing.*;
  *
  * @author Syed Yousuf
  */
-public class Screen extends JPanel
+public class Screen extends JPanel implements Runnable
 {
     // Instance Variables
     private Paddle userPaddle;
@@ -133,10 +133,10 @@ public class Screen extends JPanel
         
         // Create the scores.
         g.setColor(Color.WHITE);
-        g.setFont(new Font("TimesRoman", Font.PLAIN,30));
+        g.setFont(new Font("TimesRoman", Font.PLAIN,70));
         g.drawString("" + ball.getScoreUser(), 50, 400);
         
-        g.setFont(new Font("TimesRoman", Font.PLAIN,30));
+        g.setFont(new Font("TimesRoman", Font.PLAIN,70));
         g.drawString("" + ball.getScoreOpponent(), 50, 50);
         
         // Set the winner if the game is over.
@@ -145,6 +145,16 @@ public class Screen extends JPanel
             g.setFont(new Font("TimesRoman", Font.PLAIN,200));
             g.drawString("" + winner, 50, 350);
         }
+    }
+    
+    
+    /*
+    * Runs on a seperate thread. Allows the second player/computer to play on a 
+    * seperate thread. This allows for more smoother gameplay.
+    */
+    public void run()
+    {
+        
     }
     
 }

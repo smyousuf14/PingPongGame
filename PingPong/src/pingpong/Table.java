@@ -19,14 +19,17 @@ public class Table extends JPanel implements KeyListener,Runnable
     private Thread ballThread;
     private Screen s1;
     private boolean isRunning;
+    private boolean isSinglePlayer;
     
     /*
     * Default Constructor
     */
-    public Table()
+    public Table(boolean isSinglePlayer)
     {
         // Set isRunning to true.
         isRunning = false;
+        
+        this.isSinglePlayer = isSinglePlayer;
         
         // Create a new window
         f1 = new JFrame("Ping Pong");
@@ -252,7 +255,7 @@ public class Table extends JPanel implements KeyListener,Runnable
     */
     public static void main(String[]args)
     {
-        Table PongTable = new Table();
+        Table PongTable = new Table(false);
         
         
         Thread screenThread = new Thread(PongTable);
