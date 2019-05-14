@@ -22,14 +22,18 @@ public class Screen extends JPanel implements Runnable
     private Ball ball;
     private Thread ballMoving;
     private String winner;
+    private boolean isRunning;
+    private boolean isSinglePlayer;
     
     
     /*
     * Default Constructor
     */
-    public Screen()
+    public Screen(boolean isSinglePlayer)
     {
         winner = "";
+        this.isSinglePlayer = isSinglePlayer;
+        isRunning = true;
         userPaddle = new Paddle(400,600,30,90);
         opponentPaddle = new Paddle(400,20,30,90);
         ball = new Ball(400,400,10);
@@ -85,6 +89,15 @@ public class Screen extends JPanel implements Runnable
     }
     
     /*
+    * Gets if the game is running
+    *
+    * @return if the game is running
+    */
+    public boolean getIsRunning()
+    {
+        return isRunning;
+    }
+    /*
     * Sets the users and oppoenent rec values
     */
     public void setRecValues()
@@ -96,6 +109,18 @@ public class Screen extends JPanel implements Runnable
         ball.setRecOpponent(opponentPaddle.getXValue(), opponentPaddle.getYValue(), opponentPaddle.getWidthValue(), opponentPaddle.getLength());
         
     }
+    
+    /*
+    * Sets the value of if it is running
+    *
+    *@param isRunning if the game is running
+    */
+    public void setIsRunning(boolean isRunning)
+    {
+        this.isRunning = isRunning;
+        
+    }
+    
     
     /*
     * Set the value of the winner
@@ -154,7 +179,114 @@ public class Screen extends JPanel implements Runnable
     */
     public void run()
     {
+        // Local Variables
+        int randomNum;
         
+        while(isRunning && isSinglePlayer)
+        {
+            // Generate a random number every second and perform the corresponding actions..
+            try 
+            {
+                Thread.currentThread().sleep(1000);
+            } catch (InterruptedException ie) 
+            {
+                //None.
+
+            }
+
+            randomNum = (int)(Math.random()* 100);
+
+            /*
+            * 50 percent chance that the cpu will perfrom a good move. 30 percentage 
+            * chance that it will perfrom a bad move. 20 percent chance it will do nothing 
+            */
+            if(randomNum >= 0 && randomNum <= 50)
+            {
+                // Check the position of the ball.
+                if(ball.getXValue() >= 450)
+                {
+                    // Change the angle accordingly
+                    ball.setAngle((opponentPaddle.getPaddleSpeed()  / 10) - 1 );
+
+                    // Move the opponent paddle to the right
+                    opponentPaddle.moveX(opponentPaddle.getPaddleSpeed());
+
+                    // Also set the velocity direction
+                    ball.setVelocityDirection("right");
+                }
+                else
+                if(ball.getXValue() < 450)
+                {
+                    // Change the angle accordingly
+                    ball.setAngle((opponentPaddle.getPaddleSpeed()  / 10) - 1 );
+
+                    // Move the opponent paddle to the left
+                    opponentPaddle.moveX(-(opponentPaddle.getPaddleSpeed()));
+
+                    // Also set the velocity direction
+                    ball.setVelocityDirection("left");
+
+                    // Now increase the paddle speed if possible
+                    if(opponentPaddle.getPaddleSpeed() >= 60)
+                    {
+                        // Set to 60
+                        opponentPaddle.setPaddleSpeed(60);
+                    }
+                    else
+                    {
+                        opponentPaddle.setPaddleSpeed((opponentPaddle.getPaddleSpeed()) + 3);
+                    }
+                }
+                    
+
+            }
+            else
+            if(randomNum > 50 && randomNum <= 80)
+            {
+                 // Make a bad choise
+                 if(ball.getXValue() >= 450)
+                 {
+                     // Change the angle accordingly
+                    ball.setAngle((opponentPaddle.getPaddleSpeed()  / 10) - 1 );
+
+                    // Move the opponent paddle to the left
+                    opponentPaddle.moveX(-(opponentPaddle.getPaddleSpeed()));
+
+                    // Also set the velocity direction
+                    ball.setVelocityDirection("left");
+
+                    // Now increase the paddle speed if possible
+                    if(opponentPaddle.getPaddleSpeed() >= 60)
+                    {
+                        // Set to 60
+                        opponentPaddle.setPaddleSpeed(60);
+                    }
+                    else
+                    {
+                        opponentPaddle.setPaddleSpeed((opponentPaddle.getPaddleSpeed()) + 3);
+                    }
+                 }
+                 else
+                 if(ball.getXValue() < 450)
+                 {
+                     // Change the angle accordingly
+                    ball.setAngle((opponentPaddle.getPaddleSpeed()  / 10) - 1 );
+
+                    // Move the opponent paddle to the right
+                    opponentPaddle.moveX(opponentPaddle.getPaddleSpeed());
+
+                    // Also set the velocity direction
+                    ball.setVelocityDirection("right");
+                 }
+
+            }
+            else
+            if(randomNum > 80 && randomNum <= 100)
+            {
+                // Do nothing
+
+            }
+        }
     }
     
 }

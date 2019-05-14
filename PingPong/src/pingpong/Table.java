@@ -22,6 +22,7 @@ public class Table extends JPanel implements KeyListener,Runnable
     private boolean isSinglePlayer;
     private boolean opponentRightButtonDown;
     private boolean opponentLeftButtonDown;
+    private Thread threadSinglePlayer;
     
     /*
     * Default Constructor
@@ -47,8 +48,11 @@ public class Table extends JPanel implements KeyListener,Runnable
         // Now create the user's paddle
         //userPaddle = new Paddle(20,600,30,90);
         
-        s1 = new Screen();
+        s1 = new Screen(isSinglePlayer);
         f1.add(s1);
+        
+        threadSinglePlayer = new Thread(s1);
+        threadSinglePlayer.start();
         
         /*ball = new Ball(20,20,30);
         ballThread = new Thread(ball);
@@ -203,12 +207,13 @@ public class Table extends JPanel implements KeyListener,Runnable
             
             
             // Check the score for each player
-            if(s1.getBall().getScoreUser() == 5)
+            if(s1.getBall().getScoreUser() == 5 )
             {
                 // User wins
                 s1.setWinner("You win!");
                 isRunning = false;
                 s1.getBall().setIsRunning(false);
+                s1.setIsRunning(false);
             }
             else
             if(s1.getBall().getScoreOpponent() == 5)
@@ -217,9 +222,10 @@ public class Table extends JPanel implements KeyListener,Runnable
                 s1.setWinner("You Lose!");
                 isRunning = false;
                 s1.getBall().setIsRunning(false);
+                s1.setIsRunning(false);
             }
             
-            if(opponentRightButtonDown)
+            if(opponentRightButtonDown  && isSinglePlayer == false) 
             {
                 // Change the angle accordingly
                 s1.getBall().setAngle((s1.getOpponentPaddle().getPaddleSpeed()  / 10) - 1 );
@@ -229,6 +235,17 @@ public class Table extends JPanel implements KeyListener,Runnable
 
                 // Also set the velocity direction
                 s1.getBall().setVelocityDirection("right");
+                
+                // Now increase the paddle speed if possible
+                if(s1.getOpponentPaddle().getPaddleSpeed() >= 60)
+                {
+                    // Set to 60
+                    s1.getOpponentPaddle().setPaddleSpeed(60);
+                }
+                else
+                {
+                    s1.getOpponentPaddle().setPaddleSpeed((s1.getOpponentPaddle().getPaddleSpeed()) + 3);
+                }
 
 
                 f1.repaint();
@@ -238,7 +255,7 @@ public class Table extends JPanel implements KeyListener,Runnable
   
             }
             
-            if(opponentLeftButtonDown)
+            if(opponentLeftButtonDown && isSinglePlayer == false)
             {
                 // Change the angle accordingly
                 s1.getBall().setAngle((s1.getOpponentPaddle().getPaddleSpeed()  / 10) - 1 );
