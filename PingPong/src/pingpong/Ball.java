@@ -24,6 +24,7 @@ public class Ball extends JPanel implements Runnable
     private String velocityDirection;
     private int time;
     private int angle;
+    private String paddleHit;
     
     // User Rectangle value
     private double xRec;
@@ -52,6 +53,7 @@ public class Ball extends JPanel implements Runnable
         this.radius = radius;
         
         isRunning = false;
+        paddleHit = "";
         
         // Set the default values of x and y speed
         XSpeed = 0;
@@ -156,6 +158,16 @@ public class Ball extends JPanel implements Runnable
     }
     
     /*
+    * Get the value of the paddle that is hit
+    *
+    *@return which paddle was hit
+    */
+    public String getPaddleHit()
+    {
+        return paddleHit;
+    }
+    
+    /*
     * A setter method which sets the x coordinate value of the moveable object
     *
     *@param xCoordinate The new x coordinate value
@@ -165,6 +177,16 @@ public class Ball extends JPanel implements Runnable
         this.xCoordinate = xCoordinate;
     }
     
+    /*
+    * A setter which sets the value of the paddle hit
+    *
+    *@param paddleHit the new value for which paddle is hit or not
+    */
+    public void setPaddleHit(String paddleHit)
+    {
+        this.paddleHit = paddleHit;
+    }
+            
     /*
     * Set is running
     *
@@ -336,6 +358,7 @@ public class Ball extends JPanel implements Runnable
             // Now check for collisions with the user rectangle and perform appropriate action.
             if(collisionRecCir(xRec,yRec,recWidth, (recLenght + 50),xCoordinate, yCoordinate, radius))
             {
+                paddleHit = "user";
                 // Check if there is any velocity direction involved
                 if(velocityDirection.equals(""))
                 {
@@ -384,6 +407,7 @@ public class Ball extends JPanel implements Runnable
             // Now check for collisions with the opponent rectangle and perform appropriate actions.
             if(collisionRecCir(xRecOpponent,yRecOpponent,(recWidthOpponent - 50), (recLenghtOpponent + 50),xCoordinate, yCoordinate, radius))
             {
+                paddleHit = "opponent";
                 // Check if there is any velocity direction involved
                 if(velocityDirection.equals(""))
                 {
