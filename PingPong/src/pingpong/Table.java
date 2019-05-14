@@ -20,6 +20,8 @@ public class Table extends JPanel implements KeyListener,Runnable
     private Screen s1;
     private boolean isRunning;
     private boolean isSinglePlayer;
+    private boolean opponentRightButtonDown;
+    private boolean opponentLeftButtonDown;
     
     /*
     * Default Constructor
@@ -30,6 +32,10 @@ public class Table extends JPanel implements KeyListener,Runnable
         isRunning = false;
         
         this.isSinglePlayer = isSinglePlayer;
+        
+        // Set the default values to the opponent buttons.
+        opponentRightButtonDown = false;
+        opponentLeftButtonDown = false;
         
         // Create a new window
         f1 = new JFrame("Ping Pong");
@@ -144,47 +150,14 @@ public class Table extends JPanel implements KeyListener,Runnable
         else
         if(e.getKeyCode() == 65)
         {
-            
-            // Change the angle accordingly
-            s1.getBall().setAngle((s1.getUserPaddle().getPaddleSpeed()  / 10) - 1 );
-            
-            // Move the opponent paddle to the left
-            s1.getOpponentPaddle().moveX(-(s1.getOpponentPaddle().getPaddleSpeed()));
-            
-            // Also set the velocity direction
-            s1.getBall().setVelocityDirection("left");
-            
-            // Now increase the paddle speed if possible
-            if(s1.getOpponentPaddle().getPaddleSpeed() >= 60)
-            {
-                // Set to 60
-                s1.getOpponentPaddle().setPaddleSpeed(60);
-            }
-            else
-            {
-                s1.getOpponentPaddle().setPaddleSpeed((s1.getOpponentPaddle().getPaddleSpeed()) + 3);
-            }
-            
-            
-            f1.repaint();
+            opponentLeftButtonDown = true;
             
             e.consume();
         }
         else
         if(e.getKeyCode() == 68)
         {
-            // Change the angle accordingly
-            s1.getBall().setAngle((s1.getUserPaddle().getPaddleSpeed()  / 10) - 1 );
-            
-            // Move the opponent paddle to the right
-            s1.getOpponentPaddle().moveX(s1.getOpponentPaddle().getPaddleSpeed());
-            
-            // Also set the velocity direction
-            s1.getBall().setVelocityDirection("right");
-            
-            
-            f1.repaint();
-            
+            opponentRightButtonDown = true;          
             e.consume();
         }
             
@@ -220,6 +193,7 @@ public class Table extends JPanel implements KeyListener,Runnable
     {
         // Continuously repaint the window and set rec values
         // Also, check if the score has reached the limit. either player gets a score of 5 to win.
+        // And check if the opponent buttons have been pressed or not.
         while(isRunning)
         {
             f1.repaint();
@@ -245,6 +219,53 @@ public class Table extends JPanel implements KeyListener,Runnable
                 s1.getBall().setIsRunning(false);
             }
             
+            if(opponentRightButtonDown)
+            {
+                // Change the angle accordingly
+                s1.getBall().setAngle((s1.getOpponentPaddle().getPaddleSpeed()  / 10) - 1 );
+
+                // Move the opponent paddle to the right
+                s1.getOpponentPaddle().moveX(s1.getOpponentPaddle().getPaddleSpeed());
+
+                // Also set the velocity direction
+                s1.getBall().setVelocityDirection("right");
+
+
+                f1.repaint();
+                
+                // Set it back to false.
+                opponentRightButtonDown = false;
+  
+            }
+            
+            if(opponentLeftButtonDown)
+            {
+                // Change the angle accordingly
+                s1.getBall().setAngle((s1.getOpponentPaddle().getPaddleSpeed()  / 10) - 1 );
+
+                // Move the opponent paddle to the left
+                s1.getOpponentPaddle().moveX(-(s1.getOpponentPaddle().getPaddleSpeed()));
+
+                // Also set the velocity direction
+                s1.getBall().setVelocityDirection("left");
+
+                // Now increase the paddle speed if possible
+                if(s1.getOpponentPaddle().getPaddleSpeed() >= 60)
+                {
+                    // Set to 60
+                    s1.getOpponentPaddle().setPaddleSpeed(60);
+                }
+                else
+                {
+                    s1.getOpponentPaddle().setPaddleSpeed((s1.getOpponentPaddle().getPaddleSpeed()) + 3);
+                }
+
+
+                f1.repaint();
+                
+                opponentLeftButtonDown = false;
+            
+            }
         }
     }
    
